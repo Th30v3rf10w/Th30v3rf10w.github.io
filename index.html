@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deyaa Ahmed | Full-Stack, Automation & AI Engineer</title>
+    <link rel="icon" type="image/png" href="icons/favicon.png">
+    <meta name="description" content="Full-stack engineer building web apps, anti-bot scraping systems, browser automation, and agentic AI workflows — plus mobile apps end to end.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/engine.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+    <script src="js/projects.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        engine: {
+                            bg: '#050507',
+                            surface: '#121216',
+                            border: '#1e1e24',
+                            green: '#22c55e',
+                            blue: '#3b82f6',
+                            terminal: '#00ff41',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .skill-tag {
+            padding: 0.25rem 0.75rem;
+            background-color: #121216;
+            border: 1px solid #1e1e24;
+            font-size: 0.75rem;
+            line-height: 1rem;
+            font-family: 'JetBrains Mono', 'monospace';
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        .skill-tag:hover {
+            border-color: #22c55e;
+        }
+        .skill-tag.hover\:border-engine-blue:hover {
+            border-color: #3b82f6;
+        }
+        .skill-tag.hover\:border-white:hover {
+            border-color: #ffffff;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            background: rgba(5, 5, 7, 0.95);
+            backdrop-filter: blur(10px);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        .diagnostic-line {
+            width: 0%;
+            height: 2px;
+            background: #22c55e;
+            transition: width 1.5s ease-in-out;
+        }
+        .project-card-link {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-engine-bg text-slate-300 antialiased overflow-x-hidden">
+    <!-- Overlay Effects -->
+    <div class="fixed inset-0 bg-noise pointer-events-none z-[1]"></div>
+    <div class="fixed inset-0 animate-scan scanline pointer-events-none z-[2]"></div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileOverlay" class="mobile-overlay" onclick="toggleMobileMenu()"></div>
+    <div id="mobileDrawer" class="mobile-menu-drawer p-10 flex flex-col space-y-8">
+        <div class="flex justify-between items-center mb-10">
+            <span class="font-mono text-sm text-engine-green">MENU.SYS</span>
+            <button onclick="toggleMobileMenu()" class="text-white text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex flex-col space-y-6 font-mono text-sm uppercase tracking-widest">
+            <a href="#core" onclick="toggleMobileMenu()" class="hover:text-engine-green transition-colors">01// CORE</a>
+            <a href="#metrics" onclick="toggleMobileMenu()" class="hover:text-engine-green transition-colors">02// METRICS</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="hover:text-engine-green transition-colors">03// SKILLS</a>
+            <a href="#architecture" onclick="toggleMobileMenu()" class="hover:text-engine-green transition-colors">04// ARCHITECTURE</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="text-engine-green border border-engine-green px-4 py-2 text-center">05// CONNECT</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 border-b border-engine-border bg-engine-bg/80 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="status-dot text-engine-green bg-engine-green animate-pulse"></div>
+                    <span class="font-mono text-sm tracking-tighter text-engine-green">SYSTEM_USER: DEYAA</span>
+                </div>
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex space-x-10 font-mono text-xs uppercase tracking-widest">
+                    <a href="#core" class="hover:text-engine-green transition-colors">01// CORE</a>
+                    <a href="#metrics" class="hover:text-engine-green transition-colors">02// METRICS</a>
+                    <a href="#skills" class="hover:text-engine-green transition-colors">03// SKILLS</a>
+                    <a href="#architecture" class="hover:text-engine-green transition-colors">04// ARCHITECTURE</a>
+                    <a href="#contact" class="hover:text-engine-green transition-colors border border-engine-green px-4 py-1 rounded-sm">05// CONNECT</a>
+                </div>
+                <!-- Mobile Toggle -->
+                <button class="md:hidden text-engine-green text-xl" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="core" class="min-h-screen flex items-center pt-20">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="max-w-4xl flex flex-col items-center text-center sm:items-start sm:text-left">
+                    <div class="inline-block px-3 py-1 border border-engine-green/30 rounded-full mb-6 mx-auto sm:mx-0">
+                        <span class="terminal-text text-xs uppercase tracking-widest">> FULL_STACK_ENGINEER_LOADED</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl md:text-8xl font-bold mb-6 text-white leading-tight">
+                        Architecting <span class="text-engine-green">Systems</span> Across Web, Automation & AI
+                    </h1>
+                    <p class="text-lg sm:text-xl md:text-2xl text-slate-400 mb-10 leading-relaxed font-light">
+                        Full-stack engineer building <span class="text-white">production web apps</span>, anti-bot scraping pipelines,
+                        browser automation, and agentic AI workflows — plus mobile apps end to end. I ship the systems clients can't build in-house.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
+                        <a href="cv/Full%20Stack%20Deyaa%20Ahmed.pdf" download class="px-8 py-4 bg-engine-green text-engine-bg font-mono font-bold hover:bg-white transition-all transform hover:-translate-y-1 text-center flex items-center justify-center gap-2 w-full sm:w-auto">
+                            <i class="fas fa-download text-xs"></i> DOWNLOAD_CV
+                        </a>
+                        <a href="#architecture" class="px-8 py-4 border border-engine-border font-mono hover:border-engine-green transition-all transform hover:-translate-y-1 text-center w-full sm:w-auto">
+                            INSPECT_SYSTEM
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Showcase (Metrics) -->
+        <section id="metrics" class="py-20 md:py-32 border-y border-engine-border bg-engine-bg relative">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="mb-16 flex flex-col items-center sm:items-start text-center sm:text-left">
+                    <h2 class="text-2xl md:text-3xl font-mono font-bold text-white mb-4">SYSTEM_BENCHMARKS_</h2>
+                    <div class="w-16 md:w-20 h-1 bg-engine-green"></div>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <!-- Metric 1 -->
+                    <div class="engine-card">
+                        <div class="text-[10px] font-mono text-engine-green mb-4">SYSTEMS_SHIPPED</div>
+                        <div class="text-4xl md:text-5xl font-bold text-white mb-2">50+</div>
+                        <div class="text-xs md:text-sm text-slate-400 mb-4">Freelance & Production Systems Delivered</div>
+                        <div class="w-full bg-engine-border h-1 mb-2">
+                            <div class="bg-engine-green h-full pulse-glow" style="width: 80%"></div>
+                        </div>
+                        <div class="text-[9px] font-mono opacity-50">FULL_STACK // SCRAPING // AI // MOBILE</div>
+                    </div>
+                    <!-- Metric 2 -->
+                    <div class="engine-card">
+                        <div class="text-[10px] font-mono text-engine-blue mb-4">BOT_RELIABILITY</div>
+                        <div class="text-4xl md:text-5xl font-bold text-white mb-2">95%</div>
+                        <div class="text-xs md:text-sm text-slate-400 mb-4">Automation Success Rate Under Load</div>
+                        <div class="w-full bg-engine-border h-1 mb-2">
+                            <div class="bg-engine-blue h-full pulse-glow" style="width: 95%"></div>
+                        </div>
+                        <div class="text-[9px] font-mono opacity-50">ALMAVIVA // MULTI_ACCOUNT_ORCHESTRATION</div>
+                    </div>
+                    <!-- Metric 3 -->
+                    <div class="engine-card">
+                        <div class="text-[10px] font-mono text-engine-green mb-4">DATA_THROUGHPUT</div>
+                        <div class="text-4xl md:text-5xl font-bold text-white mb-2">100K+</div>
+                        <div class="text-xs md:text-sm text-slate-400 mb-4">Daily Records Processed (Multi-Chain)</div>
+                        <div class="w-full bg-engine-border h-1 mb-2">
+                            <div class="bg-engine-green h-full pulse-glow" style="width: 90%"></div>
+                        </div>
+                        <div class="text-[9px] font-mono opacity-50">ASYNC_IO // REAL_TIME_INGESTION</div>
+                    </div>
+                    <!-- Metric 4 -->
+                    <div class="engine-card">
+                        <div class="text-[10px] font-mono text-engine-blue mb-4">ENGINEERING_TENURE</div>
+                        <div class="text-4xl md:text-5xl font-bold text-white mb-2">6 Yrs</div>
+                        <div class="text-xs md:text-sm text-slate-400 mb-4">Building Production Systems</div>
+                        <div class="w-full bg-engine-border h-1 mb-2">
+                            <div class="bg-engine-blue h-full pulse-glow" style="width: 60%"></div>
+                        </div>
+                        <div class="text-[9px] font-mono opacity-50">PYTHON // FULL_STACK // DEVOPS</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expanded Skills Section -->
+        <section id="skills" class="py-20 md:py-32 border-b border-engine-border">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="mb-16 flex flex-col items-center sm:items-start text-center sm:text-left">
+                    <h2 class="text-2xl font-mono font-bold text-white mb-4 uppercase">System_Capabilities_</h2>
+                    <div class="w-20 h-1 bg-engine-blue"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-6 md:gap-8">
+                    <!-- Backend -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-engine-green/20 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-microchip text-engine-green"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">CORE_BACKEND</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">Python <span class="text-engine-green">(Async)</span></span>
+                            <span class="skill-tag">Django <span class="text-engine-green">(DRF)</span></span>
+                            <span class="skill-tag">FastAPI</span>
+                        </div>
+                    </div>
+
+                    <!-- Database -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-engine-blue/20 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-database text-engine-blue"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">DATA_LAYER</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag hover:border-engine-blue">PostgreSQL</span>
+                            <span class="skill-tag hover:border-engine-blue">Redis</span>
+                            <span class="skill-tag hover:border-engine-blue">Indexing</span>
+                            <span class="skill-tag hover:border-engine-blue">Optimization</span>
+                        </div>
+                    </div>
+
+                    <!-- Task Queues -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-engine-green/20 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-tasks text-engine-green"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">ASYNC_QUEUES</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">Celery</span>
+                            <span class="skill-tag">Redis_Broker</span>
+                            <span class="skill-tag">Scheduled_Tasks</span>
+                            <span class="skill-tag">Async_Processing</span>
+                        </div>
+                    </div>
+
+                    <!-- API -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-engine-blue/20 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-plug text-engine-blue"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">API_FORGE</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag hover:border-engine-blue">REST_APIs</span>
+                            <span class="skill-tag hover:border-engine-blue">JWT</span>
+                            <span class="skill-tag hover:border-engine-blue">OAuth2</span>
+                            <span class="skill-tag hover:border-engine-blue">Stripe</span>
+                            <span class="skill-tag hover:border-engine-blue">Swagger/OpenAPI</span>
+                        </div>
+                    </div>
+
+                    <!-- Scraping -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-white/10 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-spider text-white"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">DATA_EXTRACT</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag hover:border-white">Scrapy</span>
+                            <span class="skill-tag hover:border-white">BeautifulSoup</span>
+                            <span class="skill-tag hover:border-white">Selenium</span>
+                            <span class="skill-tag hover:border-white">Playwright</span>
+                            <span class="skill-tag hover:border-white">Requests/HTTPX</span>
+                        </div>
+                    </div>
+
+                    <!-- Automation -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-engine-green/20 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-robot text-engine-green"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">SYSTEM_AUTO</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">Browser_Auto</span>
+                            <span class="skill-tag">Proxy_Rotation</span>
+                            <span class="skill-tag">Anti-Detection</span>
+                            <span class="skill-tag">ETL_Pipelines</span>
+                        </div>
+                    </div>
+
+                    <!-- AI Orchestration -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-engine-blue/20 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-brain text-engine-blue"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">AI_ORCHESTRATION</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag hover:border-engine-blue">LangChain</span>
+                            <span class="skill-tag hover:border-engine-blue">CrewAI</span>
+                            <span class="skill-tag hover:border-engine-blue">n8n</span>
+                            <span class="skill-tag hover:border-engine-blue">RAG</span>
+                            <span class="skill-tag hover:border-engine-blue">Agentic_Workflows</span>
+                            <span class="skill-tag hover:border-engine-blue">LLM_Integrations</span>
+                        </div>
+                    </div>
+
+                    <!-- Cloud & DevOps -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-engine-blue/20 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-cloud text-engine-blue"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">INFRA_DEVOPS</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag hover:border-engine-blue">AWS <span class="opacity-50">(EC2/S3/RDS)</span></span>
+                            <span class="skill-tag hover:border-engine-blue">Docker</span>
+                            <span class="skill-tag hover:border-engine-blue">CI/CD</span>
+                            <span class="skill-tag hover:border-engine-blue">GitHub_Actions</span>
+                        </div>
+                    </div>
+
+                    <!-- Testing -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-white/10 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-vial text-white"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">QA_RELIABILITY</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag hover:border-white">Pytest</span>
+                            <span class="skill-tag hover:border-white">Unit_Testing</span>
+                            <span class="skill-tag hover:border-white">Integration</span>
+                            <span class="skill-tag hover:border-white">Mocking</span>
+                        </div>
+                    </div>
+
+                    <!-- Security -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-engine-green/20 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-shield-alt text-engine-green"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">SECURITY_OPS</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">OWASP_Top_10</span>
+                            <span class="skill-tag">Sentry</span>
+                            <span class="skill-tag">Logging</span>
+                            <span class="skill-tag">Secrets_Mgmt</span>
+                        </div>
+                    </div>
+
+                    <!-- Core -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-engine-blue/20 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-code-branch text-engine-blue"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">CORE_CS_TOOLS</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag hover:border-engine-blue">Algorithms</span>
+                            <span class="skill-tag hover:border-engine-blue">OOP</span>
+                            <span class="skill-tag hover:border-engine-blue">Git/GitHub</span>
+                            <span class="skill-tag hover:border-engine-blue">Linux/Bash</span>
+                        </div>
+                    </div>
+
+                    <!-- Frontend -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-engine-green/20 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-desktop text-engine-green"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">FRONTEND_UI</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">ReactJS</span>
+                            <span class="skill-tag">Tailwind</span>
+                            <span class="skill-tag">Bootstrap</span>
+                        </div>
+                    </div>
+
+                    <!-- Mobile -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-10 h-10 bg-engine-blue/20 flex items-center justify-center rounded-sm">
+                                <i class="fas fa-mobile-alt text-engine-blue"></i>
+                            </div>
+                            <h3 class="text-sm font-mono font-bold text-white">MOBILE_DEV</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-tag hover:border-engine-blue">Flutter</span>
+                            <span class="skill-tag hover:border-engine-blue">Dart</span>
+                            <span class="skill-tag hover:border-engine-blue">Riverpod</span>
+                            <span class="skill-tag hover:border-engine-blue">Supabase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section (Architecture First) -->
+        <section id="architecture" class="py-20 md:py-32 border-t border-engine-border bg-engine-surface/30">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Featured Architectures</h2>
+                        <p class="text-sm md:text-base text-slate-400">Deep dives into system design and technical implementations.</p>
+                    </div>
+                    <div class="font-mono text-xs text-engine-green animate-blink">
+                        [SELECT_SYSTEM_TO_INSPECT]
+                    </div>
+                </div>
+
+                <div id="projectsContainer" class="grid lg:grid-cols-2 gap-8 md:gap-12">
+                    <!-- Projects will be loaded dynamically here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- More Systems Shipped -->
+        <section id="more-systems" class="py-16 md:py-20 border-t border-engine-border bg-engine-bg">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="mb-10 flex flex-col items-center sm:items-start text-center sm:text-left">
+                    <h2 class="text-xl md:text-2xl font-mono font-bold text-white mb-2 uppercase">More_Systems_Shipped_</h2>
+                    <p class="text-xs md:text-sm text-slate-500">Additional production and freelance builds beyond the flagship case studies above.</p>
+                </div>
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-tag">TradeAuto <span class="text-engine-green">— multi-chain DeFi bot</span></span>
+                    <span class="skill-tag">dexscreener <span class="text-engine-green">— Node/Avro protocol decoder</span></span>
+                    <span class="skill-tag">DEX <span class="text-engine-green">— WebSocket binary protocol decoder</span></span>
+                    <span class="skill-tag">mini-RAG <span class="text-engine-green">— Arabic RAG, Docker + Prometheus</span></span>
+                    <span class="skill-tag">AliExpress Reviews Scraper <span class="text-engine-green">— multi-product scraping</span></span>
+                    <span class="skill-tag">EmailSig <span class="text-engine-green">— HTML/CSS email signature system</span></span>
+                    <span class="skill-tag">GMaps Spiral Scraper <span class="text-engine-green">— creative search algorithm</span></span>
+                    <span class="skill-tag">aliexpress-product-scraper <span class="text-engine-green">— published npm package</span></span>
+                    <span class="skill-tag">LoginPanelApp <span class="text-engine-green">— Flutter mobile UI</span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Detail Modal -->
+        <div id="projectModal" class="modal-overlay fixed inset-0 z-[100] items-center justify-center p-4 md:p-10">
+            <div class="modal-content w-full max-w-6xl bg-engine-surface border border-engine-border shadow-2xl overflow-hidden relative flex flex-col max-h-[90vh]">
+                <!-- Modal Header -->
+                <div class="border-b border-engine-border p-4 flex justify-between items-center bg-engine-bg/50">
+                    <div class="flex items-center space-x-3">
+                        <div class="status-dot bg-engine-green h-2 w-2"></div>
+                        <span id="modalProjectTag" class="font-mono text-[10px] text-engine-green tracking-widest uppercase">PROTOCOL_READY</span>
+                    </div>
+                    <button onclick="closeProjectModal()" class="text-slate-500 hover:text-white transition-colors">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Diagnostic Loading Bar -->
+                <div id="diagnosticBar" class="diagnostic-line"></div>
+
+                <!-- Modal Body -->
+                <div class="flex-1 overflow-y-auto p-6 md:p-12 font-sans custom-scrollbar">
+                    <div id="modalLoading" class="flex flex-col items-center justify-center py-20 space-y-4">
+                        <div class="text-engine-green font-mono text-sm animate-pulse">INITIATING_CORE_DIAGNOSTICS...</div>
+                        <div class="text-slate-600 font-mono text-[10px]">PLEASE_WAIT_FOR_SYSTEM_DECRYPTION</div>
+                    </div>
+
+                    <div id="modalContentInner" class="hidden space-y-12">
+                        <div id="modalScreenshots" class="hidden space-y-3">
+                            <div class="font-mono text-[10px] text-slate-500 uppercase">Visual_Preview</div>
+                            <div id="modalScreenshotsGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3"></div>
+                        </div>
+                        <div class="grid lg:grid-cols-2 gap-12">
+                            <!-- Technical Deep Dive -->
+                            <div class="space-y-8">
+                                <div>
+                                    <h2 id="modalTitle" class="text-3xl md:text-5xl font-bold text-white mb-4">Project Title</h2>
+                                    <div class="w-12 h-1 bg-engine-green"></div>
+                                </div>
+                                
+                                <div class="space-y-6">
+                                    <div class="space-y-2">
+                                        <div class="font-mono text-[10px] text-slate-500 uppercase">Challenge_Statement</div>
+                                        <p id="modalChallenge" class="text-slate-400 leading-relaxed italic border-l-2 border-engine-border pl-6"></p>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="font-mono text-[10px] text-slate-500 uppercase">Architectural_Solution</div>
+                                        <p id="modalSolution" class="text-slate-300 leading-relaxed"></p>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-6 pt-6">
+                                    <div class="engine-card border-none bg-engine-bg/30 p-4">
+                                        <div id="modalMetricValue1" class="text-2xl font-bold text-white">Value</div>
+                                        <div id="modalMetricLabel1" class="text-[9px] font-mono text-slate-500 uppercase">Label</div>
+                                    </div>
+                                    <div class="engine-card border-none bg-engine-bg/30 p-4">
+                                        <div id="modalMetricValue2" class="text-2xl font-bold text-white">Value</div>
+                                        <div id="modalMetricLabel2" class="text-[9px] font-mono text-slate-500 uppercase">Label</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Architecture Visualization -->
+                            <div class="space-y-6">
+                                <div class="font-mono text-[10px] text-slate-500 uppercase text-center md:text-left">System_Network_Map</div>
+                                <div class="bg-engine-bg border border-engine-border rounded-sm p-4 md:p-8 flex items-center justify-center min-h-[300px]">
+                                    <div id="mermaidDiagram" class="mermaid w-full"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer CTA -->
+                        <div class="flex flex-wrap gap-4 border-t border-engine-border pt-8">
+                            <a href="#contact" onclick="closeProjectModal()" class="px-6 py-3 bg-engine-green text-engine-bg font-mono text-xs font-bold hover:bg-white transition-all">DISCUSS_THIS_BUILD &rarr;</a>
+                            <a id="modalLiveLink" href="#" target="_blank" rel="noopener" class="hidden px-6 py-3 border border-engine-green text-engine-green font-mono text-xs font-bold hover:bg-engine-green hover:text-engine-bg transition-all">VIEW_LIVE_SYSTEM &nearr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screenshot Lightbox -->
+        <div id="screenshotLightbox" class="fixed inset-0 z-[110] hidden items-center justify-center bg-engine-bg/95 backdrop-blur-md p-4 md:p-10">
+            <button onclick="closeLightbox()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-2xl transition-colors z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <button onclick="lightboxNav(-1)" class="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 text-slate-400 hover:text-engine-green text-2xl md:text-3xl transition-colors z-10 p-2">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button onclick="lightboxNav(1)" class="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 text-slate-400 hover:text-engine-green text-2xl md:text-3xl transition-colors z-10 p-2">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="flex flex-col items-center gap-4 max-h-full max-w-full">
+                <img id="lightboxImage" src="" alt="" class="max-h-[75vh] max-w-full object-contain border border-engine-border rounded-sm shadow-2xl">
+                <div id="lightboxCounter" class="font-mono text-xs text-engine-green tracking-widest"></div>
+                <div id="lightboxThumbs" class="hidden md:flex gap-2 max-w-full overflow-x-auto px-4"></div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-32 bg-engine-bg">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="max-w-4xl mx-auto border border-engine-border p-1">
+                    <div class="border border-engine-border p-6 md:p-12 relative">
+                        <div class="absolute top-0 right-0 w-8 md:w-16 h-8 md:h-16 border-t border-r border-engine-green"></div>
+                        <div class="absolute bottom-0 left-0 w-8 md:w-16 h-8 md:h-16 border-b border-l border-engine-green"></div>
+                        
+                        <div class="text-center mb-10 md:mb-12">
+                            <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 uppercase tracking-tighter">Initiate_Handshake</h2>
+                            <p class="text-slate-400 font-mono text-xs md:text-sm uppercase tracking-widest">> STATUS: AWAITING_INPUT</p>
+                        </div>
+
+                        <form name="contact" class="space-y-6 md:space-y-8" netlify>
+                            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                                <div class="space-y-2">
+                                    <label class="font-mono text-[10px] uppercase text-slate-500">Sender_Identity</label>
+                                    <input type="text" name="name" required placeholder="NAME//" class="w-full bg-transparent border-b border-engine-border pb-2 focus:outline-none focus:border-engine-green text-white font-mono text-sm transition-colors">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="font-mono text-[10px] uppercase text-slate-500">Return_Address</label>
+                                    <input type="email" name="email" required placeholder="EMAIL//" class="w-full bg-transparent border-b border-engine-border pb-2 focus:outline-none focus:border-engine-green text-white font-mono text-sm transition-colors">
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="font-mono text-[10px] uppercase text-slate-500">Transmission_Payload</label>
+                                <textarea name="message" rows="4" required placeholder="MESSAGE_CONTENT//" class="w-full bg-transparent border border-engine-border p-4 focus:outline-none focus:border-engine-green text-white font-mono text-sm transition-colors"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-4 bg-engine-green text-engine-bg font-mono font-bold hover:bg-white transition-all text-sm uppercase tracking-widest">
+                                SEND_TRANSMISSION__
+                            </button>
+                        </form>
+                        
+                        <div class="mt-8 pt-8 border-t border-engine-border">
+                            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                                <div class="flex space-x-8 md:space-x-10 text-xl md:text-2xl">
+                                    <a href="https://github.com/Th30v3rf10w" target="_blank" class="text-slate-500 hover:text-white transition-colors"><i class="fab fa-github"></i></a>
+                                    <a href="https://www.linkedin.com/in/deyaa-ahmed/" target="_blank" class="text-slate-500 hover:text-engine-blue transition-colors"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                                <a href="cv/Full%20Stack%20Deyaa%20Ahmed.pdf" download class="text-xs font-mono text-engine-green border border-engine-green/30 px-4 py-2 hover:bg-engine-green hover:text-engine-bg transition-all uppercase tracking-widest">
+                                    <i class="fas fa-file-pdf mr-2"></i> ARCHIVE_CV.PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 border-t border-engine-border bg-engine-bg relative z-10">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="font-mono text-[9px] md:text-[10px] text-slate-500 tracking-widest uppercase text-center md:text-left">
+                DEYAA_AHMED // FULLSTACK_ENGINE.SYS // &copy; 2026
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="status-dot text-engine-green bg-engine-green group-hover:animate-ping"></div>
+                <span class="font-mono text-[9px] md:text-[10px] text-engine-green uppercase">System_Active: v2.4.0-stable</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Logic
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function toggleMobileMenu() {
+            mobileDrawer.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                
+                // Only intercept internal hash links that aren't just '#'
+                if (href.startsWith('#') && href.length > 1) {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Intersection Observer for Scroll Spy
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a, #mobileDrawer a');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const scrollSpyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    navLinks.forEach(link => {
+                        link.classList.remove('nav-link-active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('nav-link-active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => scrollSpyObserver.observe(section));
+
+        // Intersection Observer for Reveal Animations
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.engine-card, section h2, .space-y-6').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            revealObserver.observe(el);
+        });
+
+        // Project Modal Logic
+        let projectData = {};
+
+        function loadProjects() {
+            try {
+                const data = projectsData;
+                
+                const projectsContainer = document.getElementById('projectsContainer');
+                projectsContainer.innerHTML = '';
+                
+                data.forEach(project => {
+                    projectData[project.id] = project;
+                    
+                    const card = document.createElement('div');
+                    card.className = 'engine-card group project-card-link';
+                    card.onclick = () => openProjectModal(project.id);
+                    
+                    const previewVisual = project.screenshot
+                        ? `<img src="${project.screenshot}" alt="${project.title} screenshot" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-30">`
+                        : `<div class="absolute inset-0 flex items-center justify-center opacity-10">
+                                    <i class="${project.icon} text-4xl md:text-6xl"></i>
+                                </div>`;
+
+                    card.innerHTML = `
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-xl md:text-2xl font-bold text-white group-hover:text-engine-green transition-colors">${project.title}</h3>
+                                <span class="font-mono text-[9px] bg-engine-green/10 text-engine-green px-2 py-1">${project.status}</span>
+                            </div>
+                            <div class="aspect-video bg-engine-bg/50 border border-engine-border p-4 relative overflow-hidden">
+                                ${previewVisual}
+                                <div class="relative z-10 text-[9px] font-mono space-y-1">
+                                    <div class="text-engine-green">SYSTEM: ${project.systemName}</div>
+                                    <div class="text-white">UPTIME: ${project.uptime}</div>
+                                    <div class="text-slate-500">--------------------</div>
+                                    ${project.features.map(f => `<div>- ${f}</div>`).join('')}
+                                </div>
+                            </div>
+                            <p class="text-xs md:text-sm text-slate-400">
+                                ${project.description}
+                            </p>
+                            <div class="grid grid-cols-3 gap-2 py-4 border-y border-engine-border">
+                                ${project.tech.map((t, i) => `
+                                    <div class="text-center ${i === 1 ? 'border-x border-engine-border' : ''}">
+                                        <div class="text-white font-bold text-sm md:text-base">${t.name}</div>
+                                        <div class="text-[9px] font-mono text-slate-500 uppercase">${t.type}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="pt-2">
+                                <button class="w-full text-center py-2 border border-engine-border font-mono text-[10px] hover:bg-white hover:text-engine-bg transition-colors">VIEW_CASE_STUDY</button>
+                            </div>
+                        </div>
+                    `;
+                    projectsContainer.appendChild(card);
+                    
+                    // Re-apply reveal observer to new element
+                    card.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+                    revealObserver.observe(card);
+                });
+            } catch (error) {
+                console.error('Error loading projects:', error);
+            }
+        }
+
+        // Initialize projects
+        loadProjects();
+
+        const modal = document.getElementById('projectModal');
+        const diagnosticBar = document.getElementById('diagnosticBar');
+        const modalLoading = document.getElementById('modalLoading');
+        const modalContentInner = document.getElementById('modalContentInner');
+
+        function openProjectModal(projectId) {
+            const data = projectData[projectId];
+            if (!data) return;
+
+            // Populate data
+            document.getElementById('modalProjectTag').innerText = data.tag;
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalChallenge').innerText = data.challenge;
+            document.getElementById('modalSolution').innerText = data.solution;
+            document.getElementById('modalMetricValue1').innerText = data.metric1.value;
+            document.getElementById('modalMetricLabel1').innerText = data.metric1.label;
+            document.getElementById('modalMetricValue2').innerText = data.metric2.value;
+            document.getElementById('modalMetricLabel2').innerText = data.metric2.label;
+
+            const screenshotsWrap = document.getElementById('modalScreenshots');
+            const screenshotsGrid = document.getElementById('modalScreenshotsGrid');
+            if (data.screenshots && data.screenshots.length) {
+                screenshotsGrid.innerHTML = data.screenshots.map((src, i) => `
+                    <img src="${src}" alt="${data.title} screenshot" loading="lazy" data-index="${i}"
+                        class="screenshot-thumb w-full h-28 sm:h-36 object-cover object-top rounded-sm border border-engine-border cursor-pointer hover:border-engine-green transition-colors">
+                `).join('');
+                screenshotsGrid.querySelectorAll('.screenshot-thumb').forEach(img => {
+                    img.addEventListener('click', () => openLightbox(data.screenshots, parseInt(img.dataset.index, 10)));
+                });
+                screenshotsWrap.classList.remove('hidden');
+            } else {
+                screenshotsGrid.innerHTML = '';
+                screenshotsWrap.classList.add('hidden');
+            }
+
+            const liveLink = document.getElementById('modalLiveLink');
+            if (data.liveUrl) {
+                liveLink.href = data.liveUrl;
+                liveLink.innerHTML = `${data.liveUrlLabel || 'VIEW_LIVE_SYSTEM'} &nearr;`;
+                liveLink.classList.remove('hidden');
+            } else {
+                liveLink.classList.add('hidden');
+            }
+
+            // Mermaid Diagram
+            const diagramDiv = document.getElementById('mermaidDiagram');
+            diagramDiv.removeAttribute('data-processed');
+            diagramDiv.innerHTML = data.mermaid;
+            
+            // Show modal and start "Diagnostic"
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Reset state
+            diagnosticBar.style.width = '0%';
+            modalLoading.classList.remove('hidden');
+            modalContentInner.classList.add('hidden');
+
+            // Sequence animation
+            setTimeout(() => {
+                diagnosticBar.style.width = '100%';
+            }, 100);
+
+            setTimeout(() => {
+                modalLoading.classList.add('hidden');
+                modalContentInner.classList.remove('hidden');
+                mermaid.init(undefined, ".mermaid");
+            }, 1600);
+        }
+
+        function closeProjectModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            setTimeout(() => {
+                diagnosticBar.style.width = '0%';
+            }, 400);
+        }
+
+        // Close on escape
+        window.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('screenshotLightbox');
+            if (!lightbox.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') lightboxNav(-1);
+                if (e.key === 'ArrowRight') lightboxNav(1);
+                return;
+            }
+            if (e.key === 'Escape') closeProjectModal();
+        });
+
+        // Close on backdrop click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeProjectModal();
+        });
+
+        // Screenshot Lightbox Logic
+        let lightboxImages = [];
+        let lightboxIndex = 0;
+        const lightbox = document.getElementById('screenshotLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCounter = document.getElementById('lightboxCounter');
+        const lightboxThumbs = document.getElementById('lightboxThumbs');
+
+        function openLightbox(images, index) {
+            lightboxImages = images;
+            lightboxIndex = index;
+            renderLightbox();
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+        }
+
+        function renderLightbox() {
+            lightboxImage.src = lightboxImages[lightboxIndex];
+            lightboxCounter.innerText = `${lightboxIndex + 1} / ${lightboxImages.length}`;
+
+            lightboxThumbs.innerHTML = lightboxImages.map((src, i) => `
+                <img src="${src}" data-index="${i}"
+                    class="lightbox-thumb h-14 w-14 object-cover object-top rounded-sm cursor-pointer transition-all ${i === lightboxIndex ? 'border-2 border-engine-green opacity-100' : 'border border-engine-border opacity-50 hover:opacity-80'}">
+            `).join('');
+            lightboxThumbs.querySelectorAll('.lightbox-thumb').forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    lightboxIndex = parseInt(thumb.dataset.index, 10);
+                    renderLightbox();
+                });
+            });
+        }
+
+        function lightboxNav(delta) {
+            lightboxIndex = (lightboxIndex + delta + lightboxImages.length) % lightboxImages.length;
+            renderLightbox();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+        }
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        // Swipe support (touch devices)
+        let touchStartX = 0;
+        lightbox.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        lightbox.addEventListener('touchend', (e) => {
+            const delta = e.changedTouches[0].screenX - touchStartX;
+            if (Math.abs(delta) > 50) lightboxNav(delta < 0 ? 1 : -1);
+        });
+    </script>
+</body>
+</html>
