@@ -90,7 +90,7 @@ const projectsData = [
     icon: "fas fa-graduation-cap",
     systemName: "FSRS_Retention_Engine",
     uptime: "99%",
-    liveUrl: "https://github.com/Th30v3rf10w/LearnLab",
+    liveUrl: "https://github.com/devdeyaa/LearnLab",
     liveUrlLabel: "VIEW_ON_GITHUB",
     screenshot: "img/learnlab_1.png",
     screenshots: [
